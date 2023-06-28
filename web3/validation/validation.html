@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+
+    <script
+      src="https://cdnjs.cloudflare.com/ajax/libs/web3/4.0.1/web3.min.js"
+      integrity="sha512-aMlTKMbzNiS4Spg+fEEaH2XaCoN7r1e4KLqMFgz/dqmQ8lb6UHkod0I8epLkbO+DvSPXE4SU7qlxXpx08j7uFw=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    ></script>
+  </head>
+  <body>
+    <!-- Validation user  -->
+    <script>
+      async function verify() {
+        const web3 = new Web3(window.ethereum);
+        try {
+          const ether = window.ethereum;
+          const accounts = await ethereum.request({
+            method: "eth_requestAccounts",
+          });
+
+          const account = accounts[0];
+
+          const sing = await ethereum.request({
+            method: "personal_sign",
+            params: ["I am the owner of thes account", account],
+          });
+
+          const validation = web3.eth.accounts.recover(
+            "I am the owener of thes account ",
+            sing
+          );
+
+          console.log(account);
+          console.log(sing);
+          console.log(validation);
+        } catch (err) {
+          console.log("Erro", err);
+        }
+      }
+      verify();
+    </script>
+  </body>
+</html>
